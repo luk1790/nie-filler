@@ -4,7 +4,7 @@
 // @version      0.1
 // @description  try to take over the world!
 // @author       You
-// @match        https://icp.administracionelectronica.gob.es/icpplustieb/index.html
+// @match        https://icp.administracionelectronica.gob.es/icpplustieb/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=gob.es
 // @grant        none
 // ==/UserScript==
@@ -57,8 +57,8 @@
 
     var APPLICANT_LIST_STYLE = "background: yellow; position: absolute; top: 0; right: 0; padding: 3px;";
 
-    var PAGE_1_BASE_URL   = "https://icp.administracionelectronica.gob.es/icpplustieb/index.html";
-    var PAGE_2_INFO       = "acInfo";
+    var PAGE_1_BASE_URL   = "https://icp.administracionelectronica.gob.es/icpplustieb";
+    var PAGE_2_INFO       = "citar";
     var PAGE_3_ENTRANCE   = "acEntrada";
     var PAGE_4_VALIDATE   = "acValidarEntrada";
     var PAGE_5_SEARCH     = "acCitar";
@@ -72,7 +72,7 @@
     var SEL_P1_CERTIFICADOS_EU = "#tramite";
     var SEL_P1_PROVINCIAS      = "#divProvincias";
     var SEL_P1_ACCEPT          = "input[value='Aceptar']";
-    var SEL_P2_TRAMITE        = "#divGrupoTramites";
+    var SEL_P2_TRAMITE         = "#divGrupoTramites";
     var SEL_P2_ENTER           = "input[value='Aceptar']";
     var SEL_P3_OPT_NIE         = "input[value='N.I.E.']";
     var SEL_P3_OPT_DNI         = "input[value='D.N.I.']";
@@ -171,7 +171,7 @@
     PAGE 2
 */
     function navigatePage2() {
-        $(SEL_P2_TRAMITE+" option:contains('POLICIA-CERTIFICADOS Y ASIGNACION NIE')").prop("selected", true)
+         $(SEL_P2_TRAMITE+" option:contains('POLICIA-CERTIFICADOS Y ASIGNACION NIE')").prop("selected", true)
         triggerClick(SEL_P2_ENTER);
     }
 
