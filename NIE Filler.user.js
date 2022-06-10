@@ -181,51 +181,51 @@
   /*
     PAGE 5
 */
-  function navigatePage5() {
-    var audio = $("<audio/>", { style: "display:none;" });
-    var src = $("<source/>", { src: BEEP_MP3 });
-    audio.append(src);
-    $("body").append(audio);
+//   function navigatePage5() {
+//     var audio = $("<audio/>", { style: "display:none;" });
+//     var src = $("<source/>", { src: BEEP_MP3 });
+//     audio.append(src);
+//     $("body").append(audio);
 
-    var noApp = $(SEL_P5_NO_APP).length !== 0;
-    if (noApp && OPTIONS.auto_retry_if_no_appointment) {
-      var display = $("<div/>", { style: RETRY_COUNTER_STYLE });
-      var timePrefix = $("<span/>", { text: "Retrying in " });
-      var time = $("<span/>", { text: OPTIONS.auto_retry_interval_min });
-      var timePostfix = $("<span/>", { text: " minutes" });
-      display.append(timePrefix);
-      display.append(time);
-      display.append(timePostfix);
-      $(SEL_P5_VOLVER).after(display);
+//     var noApp = $(SEL_P5_NO_APP).length !== 0;
+//     if (noApp && OPTIONS.auto_retry_if_no_appointment) {
+//       var display = $("<div/>", { style: RETRY_COUNTER_STYLE });
+//       var timePrefix = $("<span/>", { text: "Retrying in " });
+//       var time = $("<span/>", { text: OPTIONS.auto_retry_interval_min });
+//       var timePostfix = $("<span/>", { text: " minutes" });
+//       display.append(timePrefix);
+//       display.append(time);
+//       display.append(timePostfix);
+//       $(SEL_P5_VOLVER).after(display);
 
-      setTimeout(
-        function () {
-          window.history.back();
-        },
-        OPTIONS.auto_retry_interval_min * RETRY_INT_MULTIPLYER,
-        audio,
-        time
-      );
-      setTimeout(p5_updateRetryTime, RETRY_INT_MULTIPLYER, time);
-    } else {
-      p5_ding_ding_ding(audio, 3);
-    }
-  }
+//       setTimeout(
+//         function () {
+//           window.history.back();
+//         },
+//         OPTIONS.auto_retry_interval_min * RETRY_INT_MULTIPLYER,
+//         audio,
+//         time
+//       );
+//       setTimeout(p5_updateRetryTime, RETRY_INT_MULTIPLYER, time);
+//     } else {
+//       p5_ding_ding_ding(audio, 3);
+//     }
+//   }
 
-  function p5_updateRetryTime(time) {
-    var timeVal = time.text() - 1;
-    time.text(timeVal);
-    if (timeVal > 1) {
-      setTimeout(p5_updateRetryTime, RETRY_INT_MULTIPLYER, time);
-    }
-  }
+//   function p5_updateRetryTime(time) {
+//     var timeVal = time.text() - 1;
+//     time.text(timeVal);
+//     if (timeVal > 1) {
+//       setTimeout(p5_updateRetryTime, RETRY_INT_MULTIPLYER, time);
+//     }
+//   }
 
-  function p5_ding_ding_ding(audio, beepCount) {
-    audio.trigger("play");
-    if (beepCount > 1) {
-      setTimeout(p5_ding_ding_ding, 500, audio, beepCount - 1);
-    }
-  }
+//   function p5_ding_ding_ding(audio, beepCount) {
+//     audio.trigger("play");
+//     if (beepCount > 1) {
+//       setTimeout(p5_ding_ding_ding, 500, audio, beepCount - 1);
+//     }
+//   }
 
   /*
     COMMONS
