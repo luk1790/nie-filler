@@ -72,7 +72,8 @@
     var SEL_P1_CERTIFICADOS_EU = "#tramite";
     var SEL_P1_PROVINCIAS      = "#divProvincias";
     var SEL_P1_ACCEPT          = "input[value='Aceptar']";
-    var SEL_P2_ENTER           = "input[value='Entrar']";
+    var SEL_P2_TRAMITE        = "#divGrupoTramites";
+    var SEL_P2_ENTER           = "input[value='Aceptar']";
     var SEL_P3_OPT_NIE         = "input[value='N.I.E.']";
     var SEL_P3_OPT_DNI         = "input[value='D.N.I.']";
     var SEL_P3_OPT_PASS        = "#rdbTipoDocPasDdi";
@@ -170,6 +171,7 @@
     PAGE 2
 */
     function navigatePage2() {
+        $(SEL_P2_TRAMITE+" option:contains('POLICIA-CERTIFICADOS Y ASIGNACION NIE')").prop("selected", true)
         triggerClick(SEL_P2_ENTER);
     }
 
