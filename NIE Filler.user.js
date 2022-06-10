@@ -80,10 +80,10 @@
   var SEL_P2_TRAMITE = "#divGrupoTramites";
   var SEL_P2_ENTER = "input[value='Aceptar']";
   var SEL_P3_ENTER = "input[value='Entrar']";
-  var SEL_P3_OPT_PASS = "#rdbTipoDocPas";
-  var SEL_P3_PASS_VALUE = "#txtIdCitado";
-  var SEL_P3_NAME_VALUE = "#txtDesCitado";
-  var SEL_P3_ACCEPT = "input[value='Aceptar']";
+  var SEL_P4_OPT_PASS = "#rdbTipoDocPas";
+  var SEL_P4_PASS_VALUE = "#txtIdCitado";
+  var SEL_P4_NAME_VALUE = "#txtDesCitado";
+  var SEL_P4_ACCEPT = "input[value='Aceptar']";
   var SEL_P4_SOLICITAR = "#btnEnviar";
   var SEL_P5_NO_APP = "body:contains('no hay citas disponibles')";
   var SEL_P5_VOLVER = "#btnSubmit";
@@ -190,10 +190,10 @@
 */
   function navigatePage4() {
     var app = APPLICANTS[0];
-    triggerClick(SEL_P3_OPT_PASS)
-    $(SEL_P3_PASS_VALUE).val(app.number);
-    $(SEL_P3_NAME_VALUE).val(app.name);
-    triggerClick(SEL_P3_ACCEPT)
+    triggerClick(SEL_P4_OPT_PASS)
+    $(SEL_P4_PASS_VALUE).val(app.number);
+    $(SEL_P4_NAME_VALUE).val(app.name);
+    triggerClick(SEL_P4_ACCEPT)
   }
 
 
