@@ -38,19 +38,16 @@
 
   var PAGE_1_BASE_URL =
     "https://icp.administracionelectronica.gob.es/icpplustieb/";
+  var PAGE_1_DIRECT = "acOpcDirect";
   var PAGE_2_INFO = "citar";
   var PAGE_3_ENTRANCE = "acInfo";
   var PAGE_4_ENTRANCE = "acEntrada";
   var PAGE_5_VALIDATE = "acValidarEntrada";
-  var PAGE_5_SEARCH = "acCitar";
-  var PAGE_6_ADDITIONAL = "acVerformulario"; // (Paso 2 de 5)
-  var PAGE_7_OFFER = "acOfertarcita"; // (Paso 3 de 5)
-  var PAGE_8_VERIFY = "acVerificarcita"; // (Paso 4 de 5)
+  var PAGE_6_SEARCH = "acCitar";
 
   var LOAD_WAIT_INTERVAL = 200;
   var RETRY_INT_MULTIPLYER = 60000;
 
-  var SEL_P1_CERTIFICADOS_EU = "#tramite";
   var SEL_P1_PROVINCIAS = "#divProvincias";
   var SEL_P1_ACCEPT = "input[value='Aceptar']";
   var SEL_P2_TRAMITE = "#divGrupoTramites";
@@ -61,8 +58,9 @@
   var SEL_P4_NAME_VALUE = "#txtDesCitado";
   var SEL_P4_ACCEPT = "input[value='Aceptar']";
   var SEL_P5_SOLICITAR = "#btnEnviar";
-  var SEL_P5_NO_APP = "body:contains('no hay citas disponibles')";
-  var SEL_P5_VOLVER = "#btnSubmit";
+  var SEL_P6_NO_APP = "body:contains('no hay citas disponibles')";
+  var SEL_P6_RETURN = "#btnSalir";
+  var SEL_P6_VOLVER = "#btnSubmit";
 
   var RETRY_COUNTER_STYLE =
     "font-size: large; display: inline; vertical-align: middle; margin: 20px;";
@@ -114,7 +112,10 @@
     "VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV" +
     "VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV";
 
-  if (window.location.href === PAGE_1_BASE_URL) {
+  if (
+    window.location.href === PAGE_1_BASE_URL ||
+    window.location.href.indexOf(PAGE_1_DIRECT) != -1
+  ) {
     navigatePage1();
   } else if (window.location.href.indexOf(PAGE_2_INFO) != -1) {
     navigatePage2();
@@ -124,17 +125,13 @@
     navigatePage4();
   } else if (window.location.href.indexOf(PAGE_5_VALIDATE) != -1) {
     navigatePage5();
-  } /* else if (window.location.href.indexOf(PAGE_6_ADDITIONAL) != -1) {
-        navigatePage6();
-    } else if (window.location.href.indexOf(PAGE_7_OFFER) != -1) {
-        navigatePage7();
-    } else if (window.location.href.indexOf(PAGE_8_VERIFY) != -1) {
-        navigatePage8();
-    }*/
+  } else if (window.location.href.indexOf(PAGE_6_SEARCH) != -1) {
+    navigatePage6();
+  } 
 
   /*
-    PAGE 1
-*/
+      PAGE 1
+  */
   function navigatePage1() {
     $(SEL_P1_PROVINCIAS + " option:contains('Barcelona')").prop(
       "selected",
@@ -144,8 +141,8 @@
   }
 
   /*
-    PAGE 2
-*/
+      PAGE 2
+  */
   function navigatePage2() {
     $(
       SEL_P2_TRAMITE +
@@ -155,15 +152,15 @@
   }
 
   /*
-    PAGE 3
-*/
+      PAGE 3
+  */
   function navigatePage3() {
     triggerClick(SEL_P3_ENTER);
   }
 
   /*
-    PAGE 3
-*/
+      PAGE 4
+  */
   function navigatePage4() {
     triggerClick(SEL_P4_OPT_PASS);
     $(SEL_P4_PASS_VALUE).val(APPLICANTS.number);
@@ -172,64 +169,31 @@
   }
 
   /*
-    PAGE 4
-*/
+      PAGE 5
+  */
   function navigatePage5() {
     triggerClick(SEL_P5_SOLICITAR);
   }
 
   /*
-    PAGE 5
-*/
-//   function navigatePage5() {
-//     var audio = $("<audio/>", { style: "display:none;" });
-//     var src = $("<source/>", { src: BEEP_MP3 });
-//     audio.append(src);
-//     $("body").append(audio);
+      PAGE 6
+  */
+  function navigatePage6() {
+    var audio = $("<audio/>", { style: "display:none;" });
+    var src = $("<source/>", { src: BEEP_MP3 });
+    audio.append(src);
+    $("body").append(audio);
 
-//     var noApp = $(SEL_P5_NO_APP).length !== 0;
-//     if (noApp && OPTIONS.auto_retry_if_no_appointment) {
-//       var display = $("<div/>", { style: RETRY_COUNTER_STYLE });
-//       var timePrefix = $("<span/>", { text: "Retrying in " });
-//       var time = $("<span/>", { text: OPTIONS.auto_retry_interval_min });
-//       var timePostfix = $("<span/>", { text: " minutes" });
-//       display.append(timePrefix);
-//       display.append(time);
-//       display.append(timePostfix);
-//       $(SEL_P5_VOLVER).after(display);
-
-//       setTimeout(
-//         function () {
-//           window.history.back();
-//         },
-//         OPTIONS.auto_retry_interval_min * RETRY_INT_MULTIPLYER,
-//         audio,
-//         time
-//       );
-//       setTimeout(p5_updateRetryTime, RETRY_INT_MULTIPLYER, time);
-//     } else {
-//       p5_ding_ding_ding(audio, 3);
-//     }
-//   }
-
-//   function p5_updateRetryTime(time) {
-//     var timeVal = time.text() - 1;
-//     time.text(timeVal);
-//     if (timeVal > 1) {
-//       setTimeout(p5_updateRetryTime, RETRY_INT_MULTIPLYER, time);
-//     }
-//   }
-
-//   function p5_ding_ding_ding(audio, beepCount) {
-//     audio.trigger("play");
-//     if (beepCount > 1) {
-//       setTimeout(p5_ding_ding_ding, 500, audio, beepCount - 1);
-//     }
-//   }
+    var noApp = $(SEL_P6_NO_APP).length !== 0;
+    console.log(noApp);
+    if (noApp && OPTIONS.auto_retry_if_no_appointment) {
+      triggerClick(SEL_P6_RETURN);
+    }
+  }
 
   /*
-    COMMONS
-*/
+      COMMONS
+  */
   function triggerClick(selector) {
     var el = $(selector);
     console.log(el);
