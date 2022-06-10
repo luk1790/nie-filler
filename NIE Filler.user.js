@@ -16,41 +16,17 @@
   var DNI = 1;
   var PASS = 2;
 
-  var APPLICANTS = [
-    {
-      name: "JANE MAY",
-      country: "ESTONIA",
-      docType: PASS,
-      numberPrefix: "",
-      number: "AB1234567",
-      numPostfix: "",
-      phone: "600111333",
-      email: "email333@test.com",
-      motive: "Trabajo",
-    },
-    {
-      name: "JOHN DOE",
-      country: "LETONIA",
-      docType: NIE,
-      numPrefix: "X",
-      number: "1111",
-      numPostfix: "Y",
-      phone: "600111111",
-      email: "email111@test.com",
-      motive: "Temporal, por 3 meses",
-    },
-    {
-      name: "SAM SMITH",
-      country: "LETONIA",
-      docType: DNI,
-      numberPrefix: "",
-      number: "12345678",
-      numPostfix: "A",
-      phone: "600111222",
-      email: "email222@test.com",
-      motive: "Temporal, por 3 meses",
-    },
-  ];
+  var APPLICANTS = {
+    name: "JANE MAY",
+    country: "ESTONIA",
+    docType: PASS,
+    numberPrefix: "",
+    number: "AB1234567",
+    numPostfix: "",
+    phone: "600111333",
+    email: "email333@test.com",
+    motive: "Trabajo",
+  };
 
   var OPTIONS = {
     auto_retry_if_no_appointment: true, // Automatically retry with the same person if there are no available appointments after an interval.
@@ -65,7 +41,7 @@
   var PAGE_2_INFO = "citar";
   var PAGE_3_ENTRANCE = "acInfo";
   var PAGE_4_ENTRANCE = "acEntrada";
-  var PAGE_4_VALIDATE = "acValidarEntrada";
+  var PAGE_5_VALIDATE = "acValidarEntrada";
   var PAGE_5_SEARCH = "acCitar";
   var PAGE_6_ADDITIONAL = "acVerformulario"; // (Paso 2 de 5)
   var PAGE_7_OFFER = "acOfertarcita"; // (Paso 3 de 5)
@@ -84,7 +60,7 @@
   var SEL_P4_PASS_VALUE = "#txtIdCitado";
   var SEL_P4_NAME_VALUE = "#txtDesCitado";
   var SEL_P4_ACCEPT = "input[value='Aceptar']";
-  var SEL_P4_SOLICITAR = "#btnEnviar";
+  var SEL_P5_SOLICITAR = "#btnEnviar";
   var SEL_P5_NO_APP = "body:contains('no hay citas disponibles')";
   var SEL_P5_VOLVER = "#btnSubmit";
 
@@ -146,7 +122,7 @@
     navigatePage3();
   } else if (window.location.href.indexOf(PAGE_4_ENTRANCE) != -1) {
     navigatePage4();
-  } else if (window.location.href.indexOf(PAGE_5_SEARCH) != -1) {
+  } else if (window.location.href.indexOf(PAGE_5_VALIDATE) != -1) {
     navigatePage5();
   } /* else if (window.location.href.indexOf(PAGE_6_ADDITIONAL) != -1) {
         navigatePage6();
@@ -189,19 +165,17 @@
     PAGE 3
 */
   function navigatePage4() {
-    var app = APPLICANTS[0];
-    triggerClick(SEL_P4_OPT_PASS)
-    $(SEL_P4_PASS_VALUE).val(app.number);
-    $(SEL_P4_NAME_VALUE).val(app.name);
-    triggerClick(SEL_P4_ACCEPT)
+    triggerClick(SEL_P4_OPT_PASS);
+    $(SEL_P4_PASS_VALUE).val(APPLICANTS.number);
+    $(SEL_P4_NAME_VALUE).val(APPLICANTS.name);
+    triggerClick(SEL_P4_ACCEPT);
   }
-
 
   /*
     PAGE 4
 */
-  function navigatePage4s() {
-    triggerClick(SEL_P4_SOLICITAR);
+  function navigatePage5() {
+    triggerClick(SEL_P5_SOLICITAR);
   }
 
   /*
