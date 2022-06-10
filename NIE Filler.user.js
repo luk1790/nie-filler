@@ -1,19 +1,18 @@
 // ==UserScript==
-// @name         NIE Filler
-// @description  Script for NIE automatic form filling for the Barcelona area
-// @namespace    https://sede.administracionespublicas.gob.es/
-// @version      1.4
-// @author       k.strizhak84@gmail.com
-// @match        https://sede.administracionespublicas.gob.es/icpplustieb*
-// @require      https://code.jquery.com/jquery-2.1.4.min.js
-// @grant        GM_setValue
-// @grant        GM_getValue
+// @name         Test
+// @namespace    http://tampermonkey.net/
+// @version      0.1
+// @description  try to take over the world!
+// @author       You
+// @match        https://icp.administracionelectronica.gob.es/icpplustieb/index.html
+// @icon         https://www.google.com/s2/favicons?sz=64&domain=gob.es
+// @grant        none
 // ==/UserScript==
 
 (function() {
     'use strict';
 
-    var NIE  = 0;
+     var NIE  = 0;
     var DNI  = 1;
     var PASS = 2;
 
@@ -58,7 +57,7 @@
 
     var APPLICANT_LIST_STYLE = "background: yellow; position: absolute; top: 0; right: 0; padding: 3px;";
 
-    var PAGE_1_BASE_URL   = "https://sede.administracionespublicas.gob.es/icpplustieb/citar";
+    var PAGE_1_BASE_URL   = "https://icp.administracionelectronica.gob.es/icpplustieb/index.html";
     var PAGE_2_INFO       = "acInfo";
     var PAGE_3_ENTRANCE   = "acEntrada";
     var PAGE_4_VALIDATE   = "acValidarEntrada";
@@ -71,6 +70,7 @@
     var RETRY_INT_MULTIPLYER = 60000;
 
     var SEL_P1_CERTIFICADOS_EU = "#tramite";
+    var SEL_P1_PROVINCIAS      = "#divProvincias";
     var SEL_P1_ACCEPT          = "input[value='Aceptar']";
     var SEL_P2_ENTER           = "input[value='Entrar']";
     var SEL_P3_OPT_NIE         = "input[value='N.I.E.']";
@@ -152,10 +152,8 @@
 
     }/* else if (window.location.href.indexOf(PAGE_6_ADDITIONAL) != -1) {
         navigatePage6();
-
     } else if (window.location.href.indexOf(PAGE_7_OFFER) != -1) {
         navigatePage7();
-
     } else if (window.location.href.indexOf(PAGE_8_VERIFY) != -1) {
         navigatePage8();
     }*/
@@ -164,18 +162,8 @@
     PAGE 1
 */
     function navigatePage1() {
-        p1_setCertificadosEU();
-    }
-
-    function p1_setCertificadosEU() {
-        var sel = $(SEL_P1_CERTIFICADOS_EU);
-        waitForEl(
-            sel, p1_setCertificadosEU, LOAD_WAIT_INTERVAL,
-            function() {
-                sel.val(22);
-                triggerClick(SEL_P1_ACCEPT);
-            }
-        );
+        $(SEL_P1_PROVINCIAS+" option:contains('Barcelona')").prop("selected", true)
+        triggerClick(SEL_P1_ACCEPT);
     }
 
 /*
